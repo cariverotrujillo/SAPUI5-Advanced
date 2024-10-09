@@ -1,0 +1,37 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+    <Panel>
+        <headerToolbar>
+            <Toolbar>
+                <core:Icon src="{= ${incidenceModel>status}==='0' ? 'sap-icon://accept' :
+                                   ${incidenceModel>status}==='1' ? 'sap-icon://alert' :
+                                   ${incidenceModel>status}==='2' ? 'sap-icon://decline' : ''}"/>
+                <Title text="{i18n>incidence} {incidenceModel>IncidenceId} { path: 'incidenceModel>CreationDate' , formatter: '.Formatter.dateFormat'}"></Title>
+                <ToolbarSpacer ></ToolbarSpacer>
+                <Button icon="sap-icon://save" press="onSaveIncidence"></Button>
+                <core:Icon src="sap-icon://delete" press="DeleteIcidence"></core:Icon>
+            </Toolbar>
+        </headerToolbar>
+        <content>
+            <HBox>
+                <VBox >
+                    <Text text="{i18n>incidencedate}"></Text>
+                    <DatePicker dateValue="{incidenceModel>CreationDate}"></DatePicker>
+                </VBox>
+                <VBox  visible="{= ${incidenceModel>CreationDate} !== '' &amp;&amp; ${incidenceModel>CreationDate} !== undefined}">
+                    <Text  text="{i18n>incidencereason}"></Text>
+                    <Input  value="{incidenceModel>Reason}"></Input>
+                </VBox>
+                <VBox  visible="{= ${incidenceModel>CreationDate} !== '' &amp;&amp; ${incidenceModel>CreationDate} !== undefined}">
+                    <Text  text="{i18n>incidenceType}"></Text>
+                    <Select  selectedKey="{incidenceModel>status}" forceSelection="false">
+                        <items>
+                            <core:Item  key="0" text="{i18n>incidencecorrect}"></core:Item>
+                            <core:Item  key="1" text="{i18n>incidencepending}"></core:Item>
+                            <core:Item  key="2" text="{i18n>incidenceerror}"></core:Item>
+                        </items>
+                    </Select>
+                </VBox>
+            </HBox>
+        </content>
+    </Panel>
+</core:FragmentDefinition>

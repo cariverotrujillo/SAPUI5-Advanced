@@ -7,7 +7,7 @@ sap.ui.define([
         "use strict";
 
         function onInit() {
-             this._bus = sap.ui.getCore().getEventBus();
+            this._bus = sap.ui.getCore().getEventBus();
         }
         function onFilter() {
             var oJson = this.getView().getModel("jsonCountries").getData()
@@ -76,13 +76,13 @@ sap.ui.define([
 
         function showOrders(oEvent) {
             var iconPress = oEvent.getSource()
-            var oContext = iconPress.getBindingContext("jsonEmployee")
+            var oContext = iconPress.getBindingContext("odataNorthwind")
 
             if (!this._oDialogOrders) {
                 this._oDialogOrders = sap.ui.xmlfragment("logaligroup.logali.fragment.DialogOrders", this)
                 this.getView().addDependent(this._oDialogOrders)
             }
-            this._oDialogOrders.bindElement("jsonEmployee>" + oContext.getPath())
+            this._oDialogOrders.bindElement("odataNorthwind>" + oContext.getPath())
             this._oDialogOrders.open()
 
 
@@ -91,7 +91,7 @@ sap.ui.define([
              orders.destroyItems()
      
              var item = oEvent.getSource()
-             var oContext = item.getBindingContext("jsonEmployee")
+             var oContext = item.getBindingContext("odataNorthwind")
              var objectContext = oContext.getObject()
              var ordersTable = objectContext.Orders
      
@@ -145,24 +145,24 @@ sap.ui.define([
              var columnListItem = new sap.m.ColumnListItem()
      
              var cellOrderID = new sap.m.Label()
-             cellOrderID.bindProperty("text", "jsonEmployee>OrderID")
+             cellOrderID.bindProperty("text", "odataNorthwind>OrderID")
              columnListItem.addCell(cellOrderID)
      
              var cellFreight = new sap.m.Label()
-             cellFreight.bindProperty("text", "jsonEmployee>OrderID")
+             cellFreight.bindProperty("text", "odataNorthwind>OrderID")
              columnListItem.addCell(cellFreight)
      
              var cellShipAddress = new sap.m.Label()
-             cellShipAddress.bindProperty("text", "jsonEmployee>OrderID")
+             cellShipAddress.bindProperty("text", "odataNorthwind>OrderID")
              columnListItem.addCell(cellShipAddress)    
              
              var oBindingInfo = {
-                 model: "jsonEmployee",
+                 model: "odataNorthwind",
                  path: "Orders",
                  template: columnListItem
              }
              newTableJSON.bindAggregation("items", oBindingInfo)
-             newTableJSON.bindElement("jsonEmployee>" + oContext.getPath())
+             newTableJSON.bindElement("odataNorthwind>" + oContext.getPath())
              
              orders.addItem(newTableJSON) */
         }
@@ -171,9 +171,9 @@ sap.ui.define([
             this._oDialogOrders.close()
         }
 
-        function showEmployee(oEvent){
-           var path = oEvent.getSource().getBindingContext("jsonEmployee").getPath()
-           this._bus.publish("Home", "showEmployee", path)
+        function showEmployee(oEvent) {
+            var path = oEvent.getSource().getBindingContext("odataNorthwind").getPath()
+            this._bus.publish("Home", "showEmployee", path)
         }
 
         var main = Controller.extend("logaligroup.logali.controller.MasterEmployee", {});
@@ -187,4 +187,5 @@ sap.ui.define([
         main.prototype.showOrders = showOrders;
         main.prototype.closeDialog = closeDialog;
         main.prototype.showEmployee = showEmployee;
+        return main
     });

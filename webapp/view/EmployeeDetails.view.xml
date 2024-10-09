@@ -1,4 +1,4 @@
-<mvc:View controllerName="logaligroup.logali.controller.EmployeeDetails"
+<mvc:View xmlns:launchpad="sap.ushell.ui.launchpad" controllerName="logaligroup.logali.controller.EmployeeDetails"
     xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
     xmlns="sap.m"
     xmlns:core="sap.ui.core">
@@ -6,18 +6,18 @@
         <Panel id="_IDGenPanel">
             <FlexBox id="box1" height="65px" alignItems="Center" justifyContent="Center">
                 <items>
-                    <Text id="_IDGenText10" text="{jsonEmployee>FirstName}, {jsonEmployee>LastName}" class="boldText"></Text>
+                    <Text id="_IDGenText10" text="{odataNorthwind>TitleOfCourtesy} {odataNorthwind>FirstName}, {odataNorthwind>LastName}" class="boldText"></Text>
                 </items>
             </FlexBox>
             <FlexBox id="box2" height="65px" alignItems="Start" justifyContent="SpaceBetween">
                 <items>
                         <VBox id="vbox1">
                             <Text id="_IDGenText6" text="{i18n>tableId}" class="boldText sapUiTinyMarginEnd"></Text>
-                            <Text id="_IDGenText7" text="{jsonEmployee>EmployeeID}"></Text>
+                            <Text id="_IDGenText7" text="{odataNorthwind>EmployeeID}"></Text>
                         </VBox>
                         <VBox id="vbox2">
                             <Text id="_IDGenText8" text="{i18n>titleEmployee}" class="boldText sapUiTinyMarginEnd"></Text>
-                            <Text id="_IDGenText9" text="{jsonEmployee>Title}"></Text>
+                            <Text id="_IDGenText9" text="{odataNorthwind>Title}"></Text>
                         </VBox>
                 </items>
             </FlexBox>
@@ -25,27 +25,39 @@
                 <items>
                         <HBox id="hbox1">
                             <Text id="_IDGenText" text="{i18n>tableCountry}" class="boldText sapUiTinyMarginEnd"></Text>
-                            <Text id="_IDGenText1" text="{jsonEmployee>Country}"></Text>
+                            <Text id="_IDGenText1" text="{odataNorthwind>Country}"></Text>
                             <layoutData>
                                 <FlexItemData id="_IDGenFlexItemData2" growFactor="3"></FlexItemData>
                             </layoutData>
                         </HBox>
                         <HBox id="hbox2">
                             <Text id="_IDGenText2" text="{i18n>tableCity}" class="boldText sapUiTinyMarginEnd"></Text>
-                            <Text id="_IDGenText3" text="{jsonEmployee>City}"></Text>
+                            <Text id="_IDGenText3" text="{odataNorthwind>City}"></Text>
                             <layoutData>
                                 <FlexItemData id="_IDGenFlexItemData1" growFactor="2"></FlexItemData>
                             </layoutData>
                         </HBox>
                         <HBox id="hbox3">
                             <Text id="_IDGenText4" text="{i18n>postalcode}" class="boldText sapUiTinyMarginEnd"></Text>
-                            <Text id="_IDGenText5" text="{jsonEmployee>PostalCode}"></Text>
+                            <Text id="_IDGenText5" text="{odataNorthwind>PostalCode}"></Text>
                             <layoutData>
                                 <FlexItemData id="_IDGenFlexItemData" growFactor="1"></FlexItemData>
                             </layoutData>
                         </HBox>
                 </items>
             </FlexBox>
+        </Panel>
+        <Panel id="panel1" class="sapUiSizeCompact" backgroundDesign="Transparent">
+            <headerToolbar>
+                <Toolbar id="toolbar">
+                    <Title id="title1" text="{i18n>incidence} {= ${odataNorthwind>Country} !=='US' ? ${i18n>europe} : ${i18n>us}}"></Title>
+                    <ToolbarSpacer id="ts1"></ToolbarSpacer>
+                    <Button id="button1" text="{i18n>createincidence}" press="createIncidence"></Button>
+                </Toolbar>
+            </headerToolbar>
+            <Panel id="TableIncidence" class="sapUiNoContentPadding" backgroundDesign="Transparent">
+
+            </Panel>
         </Panel>
     </Page>
 </mvc:View>
