@@ -58,6 +58,10 @@
             <Panel id="TableIncidence" class="sapUiNoContentPadding" backgroundDesign="Transparent">
 
             </Panel>
+            <Panel id="TableOrders" class="sapUiNoContentPadding" backgroundDesign="Transparent" headerText="{i18n>orders}">
+                <core:Fragment fragmentName="logaligroup.logali.fragment.TableOrders" type="XML">
+                </core:Fragment>
+            </Panel>
         </Panel>
     </Page>
 </mvc:View>

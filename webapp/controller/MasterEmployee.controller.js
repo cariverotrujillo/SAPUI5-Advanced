@@ -1,9 +1,9 @@
 sap.ui.define([
-    "sap/ui/core/mvc/Controller",
+    "logaligroup/logali/controller/Base.controller",
     "sap/ui/model/Filter",
     "sap/ui/model/FilterOperator"
 ],
-    function (Controller, Filter, FilterOperator) {
+    function (Base, Filter, FilterOperator) {
         "use strict";
 
         function onInit() {
@@ -176,7 +176,8 @@ sap.ui.define([
             this._bus.publish("Home", "showEmployee", path)
         }
 
-        var main = Controller.extend("logaligroup.logali.controller.MasterEmployee", {});
+
+        var main = Base.extend("logaligroup.logali.controller.MasterEmployee", {});
         main.prototype.onInit = onInit;
         // main.prototype.onValidate = check;
         main.prototype.onFilter = onFilter;
