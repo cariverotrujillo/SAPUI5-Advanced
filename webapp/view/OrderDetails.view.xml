@@ -1,4 +1,4 @@
-<mvc:View xmlns:upload="sap.m.upload" controllerName="logaligroup.logali.controller.OrderDetails"
+    <mvc:View xmlns:upload="sap.m.upload" controllerName="logaligroup.logali.controller.OrderDetails"
     xmlns:html="http://www.w3.org/1999/xhtml"
     xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
     xmlns="sap.m"
@@ -50,6 +50,14 @@
                         <Button text="{i18n>clear}" press="onClear" class="sapUiTinyMarginTop"></Button>
                     </FlexBox>
                 </l:Grid>
+                </Panel>
+                <Panel >
+                <headerToolbar>
+                    <Toolbar>
+                        <ToolbarSpacer ></ToolbarSpacer>
+                        <Button icon="sap-icon://download" press="onFileDownload" ></Button>
+                    </Toolbar>
+                </headerToolbar>
                 <upload:UploadSet id="uploadSet"
                                   maxFileNameLength="55"
                                   maxFileSize="10"

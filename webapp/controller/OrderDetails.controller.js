@@ -39,18 +39,19 @@ sap.ui.define(
 
           }
         })
-
-        this.byId("uploadSet").bindAggregation("items", {
-          path: "incidenceModel>FilesSet",
+        let uploadread = this.byId("uploadSet")
+        uploadread.bindAggregation("items", {
+          path: 'incidenceModel>/FilesSet',
           filters:[
             new Filter("OrderId", FilterOperator.EQ, orderId),
-            new Filter("SapId", FilterOperator.EQ, this.getOwnerComponent.SapId),
+            new Filter("SapId", FilterOperator.EQ, this.getOwnerComponent().SapId),
             new Filter("EmployeeId", FilterOperator.EQ, EmployeeId),
           ],
-          template: new sap.ui.core.Item({
-            documentId: "{incidenceModel>AttId}",
-            fileName: "{incidenceModel>fileName}"
-          }).attachPress(this.downloadFile)
+          template: new sap.m.upload.UploadSetItem({
+            fileName: "{incidenceModel>fileName}",
+            mediaType:"{incidenceModel>MimeType}",
+            visibleEdit: false
+          })
         })
 
 
@@ -130,8 +131,6 @@ sap.ui.define(
               }
             })
           }
-
-
         },
         onFileBeforeUpload : function(oEvent){
           let oItem = oEvent.getParameter("item")
@@ -147,6 +146,37 @@ sap.ui.define(
           })
           oItem.addHeaderField(OCostumerHeaderToken)
           oItem.addHeaderField(OCostumerHeaderSlug)
+        },
+        onFileUploadComplete: function (oEvent){
+          oEvent.getSource().getBinding("items").refresh()
+        },
+        onFileDelected : function(oEvent){
+          var uploadset = oEvent.getSource()
+          var sPath = oEvent.getParameter("item").getBindingContext("incidenceModel").getPath()
+          this.getView().getModel("incidenceModel").remove(sPath,{
+            success: function (){
+              uploadset.getBinding("items").refresh()
+            },
+            error: function (){
+
+            }
+        })
+        },
+        onFileDownload: function(){
+          let uploadSet = this.byId("uploadSet")
+          let oResourceBundle = this.getView().getModel("i18n").getResourceBundle()
+          let items = uploadSet.getSelectedItems()
+
+          if (items.length === 0){
+            MessageBox.error(oResourceBundle.getText("ErrorFileDel"))
+          }else{
+            items.forEach((oitem) => {
+              let OBindingContext = oitem.getBindingContext("incidenceModel"),
+              sPath = OBindingContext.getPath()
+              window.open("/sap/opu/odata/sap/YSAPUI5_SRV_01" + sPath + "/$value")
+            });
+          }
+
         }
 
   
