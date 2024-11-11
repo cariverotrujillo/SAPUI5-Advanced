@@ -17,16 +17,16 @@ sap.ui.define(
         var oView = this.getView()
         // var i18nBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle()
         var oJSONModelEmpl = new sap.ui.model.json.JSONModel()
-        oJSONModelEmpl.loadData("./localService/mockdata/Employees.json", false)
+        oJSONModelEmpl.loadData("./model/json/Employees.json", false)
         oView.setModel(oJSONModelEmpl, "jsonEmployee")
 
         var oJSONModelCount = new sap.ui.model.json.JSONModel()
-        oJSONModelCount.loadData("./localService/mockdata/Countries.json", false)
+        oJSONModelCount.loadData("./model/json/Countries.json", false)
         oView.setModel(oJSONModelCount, "jsonCountries")
 
 
         var oJSONModelLayout = new sap.ui.model.json.JSONModel()
-        oJSONModelLayout.loadData("./localService/mockdata/Layout.json", false)
+        oJSONModelLayout.loadData("./model/json/Layout.json", false)
         oView.setModel(oJSONModelLayout, "jsonLayout")
 
         var oJSONModelConfig = new sap.ui.model.json.JSONModel({
